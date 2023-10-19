@@ -37,11 +37,13 @@
 
 #define MiB_TO_BYTES(x) (1024 * 1024 * ((size_t)x))
 
-/* convert b bytes to the number of pages of size size_bits required for that many bytes */
-#define BYTES_TO_SIZE_BITS_PAGES(b, size_bits) (((b) / (BIT(size_bits))) + ((((b) % (BIT(size_bits))) > 0) ? 1 : 0))
+/* convert b bytes to the number of pages of size size_bits required for that
+ * many bytes */
+#define BYTES_TO_SIZE_BITS_PAGES(b, size_bits)                                 \
+  (((b) / (BIT(size_bits))) + ((((b) % (BIT(size_bits))) > 0) ? 1 : 0))
 #define BYTES_TO_4K_PAGES(b) BYTES_TO_SIZE_BITS_PAGES(b, PAGE_BITS_4K)
 
-#define PAGE_ALIGN(addr, size) ((addr) & ~(size-1))
+#define PAGE_ALIGN(addr, size) ((addr) & ~(size - 1))
 
-#define SAME_PAGE_4K(a, b) \
-    ((((uintptr_t)(a)) & ~PAGE_MASK_4K) == (((uintptr_t)(b)) & ~PAGE_MASK_4K))
+#define SAME_PAGE_4K(a, b)                                                     \
+  ((((uintptr_t)(a)) & ~PAGE_MASK_4K) == (((uintptr_t)(b)) & ~PAGE_MASK_4K))
